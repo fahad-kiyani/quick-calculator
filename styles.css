@@ -1,82 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f9f9f9;
-    margin: 0;
+    background-color: #f5f5f5;
+    transition: background-color 0.3s;
+}
+
+.dark-theme {
+    background-color: #2b2b2b;
+    color: white;
 }
 
 .calculator {
-    background-color: #fff;
+    width: 350px;
     padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
-    max-width: 400px;
-    width: 100%;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+
+.dark-theme .calculator {
+    background-color: #333;
 }
 
 .display {
-    margin-bottom: 20px;
-}
-
-#operation, #result {
     width: 100%;
     height: 50px;
-    font-size: 18px;
+    font-size: 24px;
     text-align: right;
     padding: 10px;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     border: none;
-    border-bottom: 2px solid #ccc;
     background-color: #f1f1f1;
+    border-radius: 8px;
 }
 
-#result {
-    font-size: 24px;
-    font-weight: bold;
+.result {
+    color: #6c757d;
 }
 
 .buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 10px;
+    gap: 10px;
 }
 
 button {
-    font-size: 22px;
-    padding: 20px;
-    background-color: #f4f4f4;
+    width: 100%;
+    height: 60px;
+    font-size: 18px;
+    background-color: #007bff;
+    color: #fff;
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, box-shadow 0.2s;
 }
 
 button:hover {
-    background-color: #ddd;
+    background-color: #0056b3;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-button:active {
-    background-color: #bbb;
+.dark-theme button {
+    background-color: #444;
 }
 
-.span-two {
+button.zero {
     grid-column: span 2;
 }
 
-@media (max-width: 400px) {
-    .calculator {
-        max-width: 100%;
-    }
+.theme-toggle button {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
 
-    button {
-        font-size: 18px;
-        padding: 15px;
-    }
-
-    #operation, #result {
-        font-size: 16px;
-    }
+.theme-toggle button:hover {
+    background-color: #218838;
 }
