@@ -1,3 +1,5 @@
+let memory = 0;  // Memory for storing values
+
 // Function to append numbers and operators to the display
 function appendToDisplay(value) {
     document.getElementById('operation').value += value;
@@ -17,26 +19,56 @@ function deleteLast() {
 
 // Function to calculate the result
 function calculate() {
+    let expression = document.getElementById('operation').value;
+
+    // Handle percentage operator and trigonometric functions
+    expression = expression.replace(/%/g, '*0.01');
+
     try {
-        let result = eval(document.getElementById('operation').value);
+        let result = new Function('return ' + expression)();
         document.getElementById('result').value = result;
     } catch (error) {
         alert('Invalid input');
     }
 }
 
-// Add keyboard support for better user experience
-document.addEventListener('keydown', function(event) {
-    const key = event.key;
-    const allowedKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '.', 'Enter', 'Backspace'];
+// Scientific Functions
+function sqrt() {
+    let currentValue = document.getElementById('operation').value;
+    document.getElementById('operation').value = Math.sqrt(${currentValue});
+    calculate();
+}
 
-    if (allowedKeys.includes(key)) {
-        if (key === 'Enter') {
-            calculate();
-        } else if (key === 'Backspace') {
-            deleteLast();
-        } else {
-            appendToDisplay(key);
-        }
-    }
-});
+function square() {
+    let currentValue = document.getElementById('operation').value;
+    document.getElementById('operation').value = ${currentValue}**2;
+    calculate();
+}
+
+function power() {
+    appendToDisplay('**');
+}
+
+// Memory Functions
+function memoryAdd() {
+    memory += parseFloat(document.getElementById('result').value) || 0;
+}
+
+function memorySubtract() {
+    memory -= parseFloat(document.getElementById('result').value) || 0;
+}
+
+function memoryClear() {
+    memory = 0;
+}
+
+function memoryRecall() {
+    document.getElementById('operation').value += memory;
+}
+
+// Dark Mode Toggle
+let darkMode = false;
+function toggleTheme() {
+    document.body.classList.toggle('dark-theme');
+    darkMode = !darkMode;
+}
