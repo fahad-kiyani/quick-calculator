@@ -22,7 +22,7 @@ function calculate() {
     let expression = document.getElementById('operation').value;
 
     // Handle percentage operator and trigonometric functions
-    expression = expression.replace(/%/g, '*0.01');
+    expression = expression.replace(/(\d+)%/g, '(($1)*0.01)');
 
     try {
         let result = new Function('return ' + expression)();
@@ -35,18 +35,17 @@ function calculate() {
 // Scientific Functions
 function sqrt() {
     let currentValue = document.getElementById('operation').value;
-    document.getElementById('operation').value = Math.sqrt(${currentValue});
-    calculate();
+    document.getElementById('operation').value = `Math.sqrt(${currentValue})`;
 }
 
 function square() {
     let currentValue = document.getElementById('operation').value;
-    document.getElementById('operation').value = ${currentValue}**2;
-    calculate();
+    document.getElementById('operation').value = `${currentValue}**2`;
 }
 
 function power() {
-    appendToDisplay('**');
+    let currentValue = document.getElementById('operation').value;
+    document.getElementById('operation').value = `Math.pow(${currentValue}, `;
 }
 
 // Memory Functions
